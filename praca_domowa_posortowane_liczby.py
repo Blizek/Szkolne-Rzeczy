@@ -1,6 +1,5 @@
 import random
 
-
 # def sorotwanie_bombelkowe(lista):
 #     for i in range(len(lista) - 1, 0, -1):
 #       for j in range(i):
@@ -35,19 +34,34 @@ import random
 #
 #     return lista
 
-def quicksort(p, k):
-    if p < k:
-        m = p
-        for i in range(p + 1, k + 1):
-            if lista_liczb[i] < lista_liczb[p]:
-                pom = lista_liczb[i]
-                lista_liczb[i] = lista_liczb[p]
-                lista_liczb[p] = pom
-        pom = lista_liczb[p]
-        lista_liczb[p] = lista_liczb[m]
-        lista_liczb[m] = pom
-        quicksort(p, m - 1)
-        quicksort(m + 1, k)
+# def quicksort(p, k):
+#     if p < k:
+#         m = p
+#         for i in range(p + 1, k + 1):
+#             if lista_liczb[i] < lista_liczb[p]:
+#                 pom = lista_liczb[i]
+#                 lista_liczb[i] = lista_liczb[p]
+#                 lista_liczb[p] = pom
+#         pom = lista_liczb[p]
+#         lista_liczb[p] = lista_liczb[m]
+#         lista_liczb[m] = pom
+#         quicksort(p, m - 1)
+#         quicksort(m + 1, k)
+
+def in_order(l):
+    if not l:
+        return True
+    last = l[0]
+    for x in l[1:]:
+        if x < last:
+            return False
+        last = x
+    return True
+
+def bogosort(l):
+    while not in_order(l):
+        random.shuffle(l)
+    return l
 
 
 lista_liczb = []
@@ -59,7 +73,7 @@ while len(lista_liczb) < 150:
 
 # posortowane = sorotwanie_bombelkowe(lista_liczb)
 # posortowane = sortowanie_wstawianie(lista_liczb)
-quicksort(0, len(lista_liczb) - 1)
+bogosort(0, len(lista_liczb) - 1)
 
 f = open("wyniki1_sorotwanie_liczb.txt", "w+")
 
@@ -75,7 +89,7 @@ lista_liczb.append(nowa_liczba)
 # # posortowane2 = sorotwanie_bombelkowe(lista_liczb)
 # # posortowane2 = sortowanie_wstawianie(lista_liczb)
 # posortowane2 = sortowanie_wybieranie(lista_liczb)
-quicksort(0, len(lista_liczb) - 1)
+bogosort(0, len(lista_liczb) - 1)
 
 g = open("wyniki2_sortowanie_liczb.txt", "w+")
 
